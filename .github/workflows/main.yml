@@ -1,0 +1,18 @@
+name: Build Shimboot
+on:
+  workflow_dispatch: # This forces the "Run workflow" button to appear
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install ARM Dependencies (If building for ARM)
+        run: sudo apt-get update && sudo apt-get install -y qemu-user-static binfmt-support
+
+      - name: Run Build Script
+        run: |
+          # Replace 'octopus' with your specific Chromebook board name
+          sudo ./build_complete.sh octopus 
